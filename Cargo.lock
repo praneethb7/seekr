@@ -3,18 +3,6 @@
 version = 4
 
 [[package]]
-name = "seekr"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "egui",
- "rayon",
- "rfd",
- "walkdir",
- "winapi",
-]
-
-[[package]]
 name = "ab_glyph"
 version = "0.2.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2617,6 +2605,18 @@ dependencies = [
  "memmap2",
  "smithay-client-toolkit",
  "tiny-skia",
+]
+
+[[package]]
+name = "seekr"
+version = "0.1.0"
+dependencies = [
+ "eframe",
+ "egui",
+ "rayon",
+ "rfd",
+ "walkdir",
+ "winapi",
 ]
 
 [[package]]
