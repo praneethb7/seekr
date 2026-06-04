@@ -40,6 +40,25 @@ cargo run --release
 - A shared, mutex-guarded handle appends matches to `output.txt`; an atomic counter assigns each match a number.
 - Progress and results are sent back to the UI over an `mpsc` channel.
 
+## Benchmark
+
+A reproducible benchmark of the parallel search core lives in [`src/bin/bench.rs`](src/bin/bench.rs). It generates a synthetic corpus (10,000 `.txt` files × 500 lines, ~340 MB) with a realistic ~1% keyword hit rate, then times the rayon-parallel scan.
+
+```bash
+cargo run --release --bin bench
+```
+
+Sample result on an Apple M3 Pro (11 worker threads):
+
+| Metric        | Value                       |
+| ------------- | --------------------------- |
+| Files scanned | 10,000                      |
+| Corpus size   | ~340 MB                     |
+| Elapsed       | < 1 s                       |
+| Throughput    | ~400–570 MB/s (~16K files/s) |
+
+> Throughput varies with OS file-cache state and system load. The benchmark uses a low (~1%) match rate so it measures scanning speed rather than output-write contention.
+
 ## Limitations
 
 - Only `.txt` files are searched; other extensions are skipped.
